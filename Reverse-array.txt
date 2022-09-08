@@ -1,0 +1,12 @@
+string reverseWord(string str){
+    int len = str.length() -1;
+    int start = 0;
+    while(start<len)
+    {
+        swap(str[start],str[len]);
+        start++;
+        len--;
+    }
+   return str;
+  
+}
