@@ -1,0 +1,57 @@
+vector<vector<int>> overlappedInterval(vector<vector<int>>& intervals) {
+         vector< vector<int>> ans;
+         vector<vector<int>> temp;
+         temp.push_back(intervals[0]);
+         int n = intervals.size();
+         sort(intervals.begin(),intervals.end());
+         for(int i = 1; i< n ; i++)
+         {
+             if(temp[0][1] >= intervals[i][0])
+             {
+                 temp[0][1] = max(intervals[i][1],temp[0][1]);
+             }
+             else{
+                 ans.push_back(temp[0]);
+                 temp[0][0] = intervals[i][0];
+                 temp[0][1] = intervals[i][1];
+                
+             }
+         }
+         ans.push_back(temp[0]);
+         return ans;
+
+
+        OR
+
+
+        stack<int> st;
+        sort(intervals.begin(),intervals.end());
+        int n=intervals.size();
+        st.push(intervals[0][0]);
+        st.push(intervals[0][1]);
+        for(int i=1;i<n;++i){
+            if(intervals[i][0]<=st.top()){
+                int t = st.top();
+                st.pop();
+                st.push(max(t,intervals[i][1]));
+            }
+            else{
+               st.push(intervals[i][0]);
+               st.push(intervals[i][1]);
+            }
+        }
+        vector<vector<int>> ans;
+        while(!st.empty()){
+            int t1 = st.top();
+            st.pop();
+            int t2 = st.top();
+            st.pop();
+            vector<int> temp;
+            temp.push_back(t2);
+            temp.push_back(t1);
+            ans.push_back(temp);
+        }
+        sort(ans.begin(),ans.end());
+        return ans;
+   }
+        
