@@ -9,8 +9,9 @@ int minJumps(int arr[], int n){
                count++;
                pos = des;
            }
-               
-           if(i>=des) return -1;
+              //each jump starts as a new array, so if first element is zero so i and des will be zero
+              //So return -1
+          if(i==des) return -1;
        }
        return count;
     }
