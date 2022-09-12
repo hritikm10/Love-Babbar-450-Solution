@@ -1,0 +1,48 @@
+void merge(long long arr[], long long l, long long mid, long long h, long long int &res){
+        int n1 = mid-l+1;
+        int n2 = h-mid;
+        
+        long long *left = new long long[n1];
+        long long *right = new long long[n2];
+        
+        for(int i=0; i<n1; i++)
+            left[i] = arr[l+i];
+        
+        for(int i=0; i<n2; i++)
+            right[i] = arr[mid+1+i];
+        
+        int i=0, j=0, k=l;
+        while(i<n1 && j<n2){
+            if(left[i] <= right[j])
+                arr[k++] = left[i++];
+            else{
+                res += (n1-i);
+                arr[k++] = right[j++];
+            }
+        }
+        
+        while(i<n1){
+            arr[k++] = left[i++];
+        }
+        while(j<n2){
+            arr[k++] = right[j++];
+        }
+        
+
+    }
+    void mergeSort(long long arr[], long long l, long long h, long long int &res){
+
+        if(l<h){
+            int mid = l+(h-l)/2;
+            mergeSort(arr, l, mid, res);
+            mergeSort(arr, mid+1, h, res);
+            merge(arr, l, mid, h, res);
+        }
+
+    }
+    long long int inversionCount(long long arr[], long long N)
+    {
+        long long int res = 0;
+        mergeSort(arr, 0, N-1, res);
+        return res;
+    }
