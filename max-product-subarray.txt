@@ -1,0 +1,15 @@
+	long long maxProduct(vector<int> arr, int n) {
+	 long long  ans = arr[0];
+    long long  mx = ans;
+   long long  mi = ans;
+    for(int i = 1;i<n;i++){
+        if(arr[i]<0){
+            swap(mx , mi);
+        }
+        mx = max(arr[i]*1ll , (mx*arr[i]));
+        mi = min(arr[i]*1ll , (mi*arr[i]));
+        
+        ans = max(ans , mx);
+    }
+    return ans; 
+	}
