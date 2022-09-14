@@ -1,0 +1,24 @@
+ vector<int> factorial(int N){
+        vector<int>v;
+        v.push_back(1);
+        for(int i=1;i<=N;i++){
+            int carry=0;
+            for(int j=0;j<v.size();j++){
+                int num=(v[j]*i)+carry;
+                if(num<=9){ 
+                         v[j]=num;
+                         carry=0;
+                    
+                }
+                else {
+                    carry=num/10;
+                    v[j]=num%10;
+                }
+            }
+            while(carry){
+                v.push_back(carry%10);
+                carry/=10;
+            }
+        }
+        reverse(v.begin(),v.end());
+        return v;
